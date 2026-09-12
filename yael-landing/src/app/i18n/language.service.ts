@@ -1,23 +1,27 @@
 import { Injectable, computed, signal } from '@angular/core';
-import { CONTENT, Lang } from './content';
+import { CONTENT, LANG_PATH, Lang } from './content';
 
-const STORAGE_KEY = 'yael-cmp-lang';
-
-function readStoredLang(): Lang {
-  if (typeof localStorage === 'undefined') return 'es';
-  const stored = localStorage.getItem(STORAGE_KEY);
-  return stored === 'en' ? 'en' : 'es';
-}
-
+/**
+ * The active language.
+ *
+ * Each language is a real prerendered route ('/' and '/en'), so the language is
+ * decided by the URL rather than by client-side state. That keeps the server-rendered
+ * HTML and the hydrated DOM identical — no flash of the wrong language on load — and
+ * lets both languages be indexed and linked to independently.
+ */
 @Injectable({ providedIn: 'root' })
 export class LanguageService {
-  readonly lang = signal<Lang>(readStoredLang());
-  readonly content = computed(() => CONTENT[this.lang()]);
+  private readonly current = signal<Lang>('es');
 
-  set(lang: Lang): void {
-    this.lang.set(lang);
-    if (typeof localStorage !== 'undefined') {
-      localStorage.setItem(STORAGE_KEY, lang);
-    }
+  readonly lang = this.current.asReadonly();
+  readonly content = computed(() => CONTENT[this.current()]);
+
+  /** The language the toggle switches to, and the path it lives at. */
+  readonly other = computed<Lang>(() => (this.current() === 'es' ? 'en' : 'es'));
+  readonly otherPath = computed(() => LANG_PATH[this.other()]);
+
+  /** Called once per navigation, from the route's `data.lang`. */
+  setFromRoute(lang: Lang): void {
+    this.current.set(lang);
   }
 }

@@ -1,15 +1,9 @@
-import { Component, inject } from '@angular/core';
-import { LanguageService } from './i18n/language.service';
-import { MAILTO_HREF } from './i18n/content';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [],
-  templateUrl: './app.html',
-  styleUrl: './app.css',
+  imports: [RouterOutlet],
+  template: '<router-outlet />',
 })
-export class App {
-  protected readonly lang = inject(LanguageService);
-  protected readonly t = this.lang.content;
-  protected readonly mailto = MAILTO_HREF;
-}
+export class App {}

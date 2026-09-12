@@ -1,56 +1,128 @@
-/* You can add global styles to this file, and also import other style files */
+/* ============================================================
+   Fuentes propias (antes en fonts.googleapis.com)
+   Se sirven desde /fonts para quitar el CSS de terceros de la ruta
+   crítica: 8 peticiones a gstatic pasan a 2 archivos locales
+   (Figtree es variable: un archivo cubre 400/600/700).
+   ============================================================ */
+
+@font-face {
+  font-family: 'Caprasimo';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/caprasimo-latin.woff2') format('woff2');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Caprasimo';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/caprasimo-latin-ext.woff2') format('woff2');
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+    U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
+    U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Figtree';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/figtree-latin.woff2') format('woff2');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Figtree';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('/fonts/figtree-latin-ext.woff2') format('woff2');
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+    U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
+    U+A720-A7FF;
+}
+
 /* ============================================================
    Yael cmp — tokens de diseño
-   Fuente: design_handoff_landing/README.md (sistema Organic)
+   Fuente: design-plan/README.md (sistema Organic)
    Uso: importar UNA sola vez, en styles.css global de Angular.
    ============================================================ */
 
 :root {
   /* ---------- Color ---------- */
-  --color-bg:            #f5ead8; /* fondo de página */
-  --color-surface:       #ebddc5; /* panel "Cómo trabajo", track del toggle */
-  --color-text:          #201e1d; /* tinta principal, fondo del panel oscuro */
+  --color-bg: #f5ead8; /* fondo de página */
+  --color-surface: #ebddc5; /* panel "Cómo trabajo" */
+  --color-text: #201e1d; /* tinta principal, fondo del panel oscuro */
 
-  --color-accent:        #c67139; /* botón primario, círculos de pasos */
-  --color-accent-2:      #7a8a5e; /* segunda voz (salvia) */
+  /* --color-accent se reserva para lo accionable: botones y el idioma activo.
+     Nada decorativo lleva este color, para que el CTA se lea de un vistazo.
+     #a85a27 da 5.05:1 con blanco — el #c67139 anterior daba 3.61:1 (fallaba AA). */
+  --color-accent: #a85a27;
+  --color-accent-2: #7a8a5e; /* segunda voz (salvia): marcas de la lista */
 
-  --color-neutral-100:   #f9f4ed; /* relleno de tarjetas, tinta sobre oscuro */
-  --color-neutral-300:   #dcd3c4; /* párrafos sobre panel oscuro */
-  --color-neutral-400:   #c0b6a5; /* línea de pie sobre oscuro (móvil) */
-  --color-neutral-700:   #645c50; /* kickers, captions */
-  --color-neutral-800:   #474238; /* párrafos sobre crema */
+  --color-neutral-100: #f9f4ed; /* relleno de tarjetas, tinta sobre oscuro */
+  --color-neutral-300: #dcd3c4; /* párrafos sobre panel oscuro */
+  --color-neutral-400: #c0b6a5; /* línea de pie sobre oscuro */
+  --color-neutral-700: #645c50; /* kickers, captions */
+  --color-neutral-800: #474238; /* párrafos sobre crema */
 
-  --color-accent-300:    #ffc6a5; /* kicker sobre oscuro, hover CTA oscuro */
-  --color-accent-400:    #f6a06b; /* relleno CTA sobre panel oscuro */
-  --color-accent-600:    #b2622d; /* hover del botón primario */
-  --color-accent-700:    #8c491a; /* números de servicio, enlaces, etiquetas */
-  --color-accent-900:    #402310; /* tinta del CTA claro sobre oscuro */
+  --color-accent-300: #ffc6a5; /* kicker sobre oscuro, hover CTA oscuro */
+  --color-accent-400: #f6a06b; /* relleno CTA sobre panel oscuro */
+  --color-accent-700: #8c491a; /* hover del botón primario, anillo de foco */
+  --color-accent-900: #402310; /* tinta del CTA claro sobre oscuro */
 
-  --color-accent-2-200:  #e1eecc; /* relleno del tag de disponibilidad */
-  --color-accent-2-800:  #3d472b; /* tinta del tag de disponibilidad */
+  --color-accent-2-200: #e1eecc; /* relleno del tag de disponibilidad */
+  --color-accent-2-700: #4d5a37; /* marca de la lista de servicios */
+  --color-accent-2-800: #3d472b; /* tinta del tag de disponibilidad */
+
+  /* #8c491a pasa 3:1 sobre los tres fondos claros (mínimo 5.09:1).
+     El accent base no: 2.69:1 sobre --color-surface. */
+  --color-focus: #8c491a;
 
   /* ---------- Tipografía ---------- */
-  --font-display: "Caprasimo", serif;   /* solo títulos */
-  --font-body:    "Figtree", sans-serif; /* 400 / 600 / 700 */
+  --font-display: 'Caprasimo', Georgia, serif; /* solo h1 y h2 */
+  --font-body: 'Figtree', system-ui, sans-serif; /* 400 / 600 / 700 */
+
+  /* Escala fluida: cada paso interpola entre el valor móvil y el de escritorio
+     del handoff, así no hay salto en el breakpoint. */
+  --text-hero: clamp(2.0625rem, 1.05rem + 4.3vw, 3.9375rem); /* 33 → 63 */
+  --text-h2: clamp(1.5625rem, 1rem + 2.37vw, 2.5rem); /* 25 → 40 */
+  --text-h2-alt: clamp(1.625rem, 1rem + 2.63vw, 2.75rem); /* 26 → 44 */
+  --text-title: clamp(1.1875rem, 1rem + 0.79vw, 1.4375rem); /* 19 → 23 */
+  --text-lead: clamp(1.0313rem, 0.95rem + 0.34vw, 1.1563rem); /* 16.5 → 18.5 */
+  --text-about: clamp(1rem, 0.87rem + 0.53vw, 1.1563rem); /* 16 → 18.5 */
+  --text-body: clamp(0.9688rem, 0.94rem + 0.13vw, 1rem); /* 15.5 → 16 */
+  --text-btn: clamp(1.0313rem, 0.95rem + 0.34vw, 1.125rem); /* 16.5 → 18 */
+  --text-sm: 0.875rem; /* 14 */
+  --text-xs: clamp(0.75rem, 0.72rem + 0.13vw, 0.8125rem); /* 12 → 13 */
 
   /* ---------- Espaciado (escala Organic × 1.10) ---------- */
-  --space-1:  4.4px;
-  --space-2:  8.8px;
-  --space-3:  13.2px;
-  --space-4:  17.6px;
-  --space-5:  26.4px;
-  --space-6:  35.2px;
+  --space-1: 4.4px;
+  --space-2: 8.8px;
+  --space-3: 13.2px;
+  --space-4: 17.6px;
+  --space-5: 26.4px;
+  --space-6: 35.2px;
   /* ritmo de sección */
-  --space-7:  44px;
-  --space-8:  61.6px;
-  --space-9:  70.4px;
+  --space-7: 44px;
+  --space-8: 61.6px;
+  --space-9: 70.4px;
   --space-10: 79.2px;
   --space-11: 88px;
 
   /* ---------- Radios ---------- */
-  --radius-sm:   8px;
-  --radius-md:   16px;
-  --radius-lg:   28px;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 28px;
   --radius-full: 999px; /* botones, tags, slots circulares */
 
   /* ---------- Sombras ---------- */
@@ -59,21 +131,33 @@
   --shadow-lg: 0 12px 32px rgba(46, 43, 37, 0.22);
 
   /* ---------- Movimiento ---------- */
-  --ease-out:  cubic-bezier(0.16, 0.84, 0.3, 1);
-  --dur-rise:  0.75s;
+  --ease-out: cubic-bezier(0.16, 0.84, 0.3, 1);
+  --dur-rise: 0.75s;
   --dur-drift: 1.1s;
   --dur-hover: 0.3s;
 
   /* ---------- Layout ---------- */
-  --gutter-desktop: var(--space-9); /* 70.4px */
-  --gutter-mobile:  var(--space-5); /* 26.4px */
+  --shell-max: 1200px; /* el diseño se dibujó a 1280; no crece más */
+  --gutter: var(--space-5); /* 26.4px */
+  --section-gap: var(--space-7); /* ritmo vertical entre secciones */
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --gutter: var(--space-9); /* 70.4px */
+    --section-gap: var(--space-11); /* 88px */
+  }
 }
 
 /* ============================================================
    Base
    ============================================================ */
 
-*, *::before, *::after { box-sizing: border-box; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -84,11 +168,20 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3 {
-  font-family: var(--font-display);
+h1,
+h2,
+h3 {
   font-weight: 400;
   margin: 0;
   text-wrap: pretty;
+}
+
+/* La cara display se reserva para h1 y h2. Los títulos de tarjeta y de paso
+   usan Figtree 700, para que Caprasimo no compita consigo misma en 5 tamaños. */
+h1,
+h2 {
+  font-family: var(--font-display);
+  overflow-wrap: anywhere; /* el h1 en español es largo; nunca debe desbordar */
 }
 
 p {
@@ -97,18 +190,33 @@ p {
   color: var(--color-neutral-800);
 }
 
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+}
+
 /* Foco visible en TODO elemento interactivo. Nunca el default del navegador. */
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-focus);
   outline-offset: 2px;
+  border-radius: 2px;
 }
 
 /* Respeta a quien pidió menos movimiento en su sistema operativo. */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
@@ -117,19 +225,43 @@ p {
    ============================================================ */
 
 @keyframes riseIn {
-  from { opacity: 0; transform: translateY(18px); }
-  to   { opacity: 1; transform: none; }
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @keyframes driftIn {
-  from { opacity: 0; transform: scale(0.94) rotate(-3deg); }
-  to   { opacity: 1; transform: none; }
+  from {
+    opacity: 0;
+    transform: scale(0.94) rotate(-3deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
-.rise    { animation: riseIn var(--dur-rise) var(--ease-out) both; }
-.rise-1  { animation-delay: 0s; }
-.rise-2  { animation-delay: 0.08s; }
-.rise-3  { animation-delay: 0.16s; }
-.rise-4  { animation-delay: 0.24s; }
+.rise {
+  animation: riseIn var(--dur-rise) var(--ease-out) both;
+}
+.rise-1 {
+  animation-delay: 0s;
+}
+.rise-2 {
+  animation-delay: 0.08s;
+}
+.rise-3 {
+  animation-delay: 0.16s;
+}
+.rise-4 {
+  animation-delay: 0.24s;
+}
 
-.drift   { animation: driftIn var(--dur-drift) var(--ease-out) 0.2s both; }
+.drift {
+  animation: driftIn var(--dur-drift) var(--ease-out) 0.2s both;
+}
