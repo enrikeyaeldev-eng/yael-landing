@@ -1,0 +1,139 @@
+<a class="skip-link" href="#main">{{ t().skipToContent }}</a>
+
+<header class="nav">
+  <div class="shell nav-inner">
+    <div class="nav-id">
+      <span class="brand">{{ t().brand }}</span>
+      <span class="tag">{{ t().disponible }}</span>
+    </div>
+
+    <div class="nav-right">
+      <nav class="lang-toggle" [attr.aria-label]="t().langLabel">
+        @for (l of langs; track l) {
+          <a
+            class="lang-btn"
+            [class.is-active]="lang.lang() === l"
+            [attr.aria-current]="lang.lang() === l ? 'true' : null"
+            [routerLink]="paths[l]"
+            [attr.hreflang]="l"
+            >{{ l | uppercase }}</a
+          >
+        }
+      </nav>
+      <a class="btn btn-primary nav-cta" [href]="mailto">{{ t().cta }}</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="shell hero-inner">
+      <div class="hero-copy">
+        <h1 class="rise rise-1">{{ t().heroTitulo }}</h1>
+        <p class="hero-sub rise rise-2">{{ t().heroSub }}</p>
+        <div class="hero-actions rise rise-3">
+          <a class="btn btn-primary btn-lg" [href]="mailto">{{ t().cta }}</a>
+          <a class="btn btn-outline btn-lg" [href]="whatsapp" target="_blank" rel="noopener">
+            {{ t().whatsappCta }}
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-visual drift">
+        <img
+          class="hero-visual-img"
+          src="/images/otter-working.svg"
+          [alt]="t().heroVisualAlt"
+          width="896"
+          height="1195"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Services read as a checklist the visitor identifies with, not as a ranked
+       sequence — so no numerals here. The one ordered block on the page is "Cómo
+       trabajo" below, which is the only place numbering means anything. -->
+  <section class="services">
+    <div class="shell">
+      <div class="section-head">
+        <span class="kicker">{{ t().serviciosKicker }}</span>
+        <h2>{{ t().serviciosTitulo }}</h2>
+      </div>
+
+      <ul class="services-list">
+        @for (s of t().servicios; track s.kicker) {
+          <li class="service">
+            <span class="service-mark" aria-hidden="true"></span>
+            <div class="service-body">
+              <span class="service-kicker">{{ s.kicker }}</span>
+              <h3 class="service-title">{{ s.sintoma }}</h3>
+              <p class="service-text">{{ s.texto }}</p>
+            </div>
+          </li>
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="how">
+    <div class="shell">
+      <div class="how-panel">
+        <h2>{{ t().pasosTitulo }}</h2>
+        <ol class="steps">
+          @for (p of t().pasos; track p.num) {
+            <li class="step">
+              <span class="step-num" aria-hidden="true">{{ p.num }}</span>
+              <div class="step-body">
+                <h3 class="step-title">{{ p.titulo }}</h3>
+                <p class="step-text">{{ p.texto }}</p>
+              </div>
+            </li>
+          }
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="shell about-inner">
+      <div class="about-visual">
+        <img
+          src="/images/otter-phone.svg"
+          [alt]="t().aboutVisualAlt"
+          width="794"
+          height="1081"
+          loading="lazy"
+        />
+      </div>
+      <div class="about-copy">
+        <h2>{{ t().sobreTitulo }}</h2>
+        <p class="about-text">{{ t().sobreTexto }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact">
+    <div class="shell contact-panel">
+      <div class="contact-copy">
+        <span class="kicker contact-kicker">{{ t().contactoKicker }}</span>
+        <h2 class="contact-title">{{ t().contactoTitulo }}</h2>
+        <p class="contact-body">{{ t().contactoTexto }}</p>
+      </div>
+      <div class="contact-actions">
+        <a class="btn btn-onDark btn-lg" [href]="mailto">{{ t().contactoEmail }}</a>
+        <a class="btn btn-onDark-outline btn-lg" [href]="whatsapp" target="_blank" rel="noopener">
+          {{ t().whatsappNumero }}
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="shell footer-inner">
+    <span>{{ t().stackLine }}</span>
+    <span>{{ t().copyright }}</span>
+  </div>
+</footer>
